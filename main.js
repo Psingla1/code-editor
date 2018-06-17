@@ -35,7 +35,7 @@ function createWindow() {
     height: 600
   });
 
-  browserWindow.loadFile("index.html");
+  browserWindow.loadFile("editor.html");
 
   // browserWindow.webContents.openDevTools();
 

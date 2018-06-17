@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+  <title>Browser Window</title>
+  <style type="text/css">
+
+  div.CodeMirror {
+    height: 100%;
+    width: 100%;
+  }
+
+  body {
+    margin: 0px;
+  }
+
+  .cm-trailingspace {
+    background: red;
+    opacity: 0.4;
+  }
+  </style>
+  <link rel="stylesheet" href="node_modules/codemirror/lib/codemirror.css" type="text/css">
+  <link rel="stylesheet" href="node_modules/codemirror/theme/solarized.css" type="text/css">
+  <link rel="stylesheet" href="node_modules/codemirror/addon/hint/show-hint.css" type="text/css">
+</head>
+
+<body>
+  <div>
+    <textarea id="editor" class="editor-textarea">
+// 'Hello World!' in javascript!
+function helloWorld() {
+  console.log('Hello World!');
+}
+</textarea>
+  </div>
+  <script type="text/javascript" src="editor.js">
+</script>
+</body>
+</html>
