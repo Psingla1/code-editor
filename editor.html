@@ -1,27 +1,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
 <html>
+
 <head>
   <title>Browser Window</title>
   <style type="text/css">
+    div.CodeMirror {
+      height: 100%;
+      width: 100%;
+    }
 
-  div.CodeMirror {
-    height: 100%;
-    width: 100%;
-  }
+    body {
+      margin: 0px;
+    }
 
-  body {
-    margin: 0px;
-  }
-
-  .cm-trailingspace {
-    background: red;
-    opacity: 0.4;
-  }
+    .cm-trailingspace {
+      background: red;
+      opacity: 0.4;
+    }
   </style>
   <link rel="stylesheet" href="node_modules/codemirror/lib/codemirror.css" type="text/css">
   <link rel="stylesheet" href="node_modules/codemirror/theme/solarized.css" type="text/css">
   <link rel="stylesheet" href="node_modules/codemirror/addon/hint/show-hint.css" type="text/css">
+  <link rel="stylesheet" href="node_modules/codemirror/addon/fold/foldgutter.css" type="text/css">
 </head>
 
 <body>
@@ -34,6 +35,7 @@ function helloWorld() {
 </textarea>
   </div>
   <script type="text/javascript" src="editor.js">
-</script>
+  </script>
 </body>
+
 </html>

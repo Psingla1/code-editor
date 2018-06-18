@@ -28,6 +28,7 @@ function createWindow() {
 app.on("ready", function() {
   createWindow();
   require('./menu').setupMenu();
+  console.log("App is ready.");
 });
 
 app.on("window-all-closed", function() {

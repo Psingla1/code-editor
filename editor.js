@@ -18,11 +18,27 @@ require("codemirror/addon/edit/continuelist");
 require("codemirror/addon/comment/comment");
 require("codemirror/addon/fold/foldcode");
 require("codemirror/addon/fold/foldgutter");
+require("codemirror/addon/fold/brace-fold");
 require("codemirror/addon/hint/show-hint");
 require("codemirror/addon/hint/anyword-hint");
 require("codemirror/addon/search/match-highlighter");
 require("codemirror/addon/lint/lint");
 require("codemirror/addon/lint/javascript-lint");
+
+
+// Foding settings.
+var braceFoldFunc = CodeMirror.newFoldFunction(CodeMirror.braceRangeFinder);
+
+function saveFile() {
+  fs.writeFile(codeMirror.getDoc().openedFilePath, codeMirror.getValue(), (err) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+
+    console.log("The file has been succesfully saved");
+  });
+}
 
 var codeMirror = CodeMirror.fromTextArea(document.getElementById('editor'), {
   mode: 'javascript',
@@ -42,15 +58,26 @@ var codeMirror = CodeMirror.fromTextArea(document.getElementById('editor'), {
   foldGutter: true,
   showHint: true,
   extraKeys: {
-    "Ctrl-Space": "autocomplete"
+    "Ctrl-Space": "autocomplete",
+    "Cmd-S": saveFile,
+    "Ctrl-Q": function(cm) {
+      braceFoldFunc(cm, cm.getCursor().line);
+    },
   },
   lint: CodeMirror.lint.javascript,
+  gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
 });
 
-const {ipcRenderer} = require('electron');
+const {
+  ipcRenderer
+} = require('electron');
 const fs = require('fs');
+
 ipcRenderer.on('show-file', function(event, args) {
-  const {filePath, content} = args;
+  const {
+    filePath,
+    content
+  } = args;
   // Store the filePath for later use.
   codeMirror.getDoc().openedFilePath = filePath;
   codeMirror.setValue(content);
@@ -73,14 +100,4 @@ ipcRenderer.on('show-file', function(event, args) {
 });
 
 
-ipcRenderer.on('save-file', function saveFile() {
-  fs.writeFile(codeMirror.getDoc().openedFilePath, codeMirror.getValue(), (err) => {
-    if (err) {
-      console.log(err);
-      return;
-    }
-
-    console.log("The file has been succesfully saved");
-  });
-});
-
+ipcRenderer.on('save-file', saveFile);
